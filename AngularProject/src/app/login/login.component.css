@@ -1,0 +1,48 @@
+.body{
+    overflow-x: hidden;
+    overflow-y: hidden; 
+}
+
+.centered {
+  position: absolute;
+  top: 30%;
+  left: 27%;
+  transform: translate(0%, 0%);
+}
+
+.bg-lightblack{
+background: rgba(129, 129, 129, 0.6);
+border-radius: 20px;
+}
+
+.bg-white{
+    background: white;
+}
+
+.bg-aliceblue{
+    background: aliceblue;
+}
+
+.txt-col-white{
+    color: white !important;
+}
+
+.txt-col-black{
+    color: black !important;
+}
+
+.txt-col-red{
+    color: red !important;
+}
+
+.btn-primary{
+color : #fff;
+background: lightseagreen !important;
+border-color: lightseagreen !important;
+}
+
+.btn-primary:hover{
+box-shadow: 2px 2px 2px 2px lightgray;
+background: lightseagreen !important;
+border-color: lightseagreen !important;
+}

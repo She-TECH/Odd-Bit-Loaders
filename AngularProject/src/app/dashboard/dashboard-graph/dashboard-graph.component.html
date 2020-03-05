@@ -1,0 +1,47 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row p-20">
+            <div class="col-md-12 bg-white border-lg bx-shdw">
+                <div class="row bg-lg p-1">
+                    <div class="col-md-6 mt-1">
+                      <h6>{{processValuekey}}</h6>
+                    </div>
+                    
+                    <div class="col-md-2"></div>
+                    
+                    <div class="col-md-4 custom-hover text-right">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input class="form-control" style="float:none" placeholder="{{currentDate | date: 'dd/MM/yyyy' }}" ngx-mydatepicker name="mydate"
+                                           [(ngModel)]="selectedGraphDate" [options]="myDatePickerOptions" #dp="ngx-mydatepicker"/>
+                            
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                                            <img class="w-100" src="../../../assets/images/if_calendar_1608599.png" alt="">
+                                        </button>
+                                    </span>
+                                    
+                                </div>
+                            </div>
+                            <div class="col-md-2 mt-1">
+                                <button type="button" class="btn btn-primary btn-sm" (click)="filterOnDateForGraph()">OK</button>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <div id="chart">
+                          <canvas id="canvas">{{ chart }}</canvas>
+                        </div>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
