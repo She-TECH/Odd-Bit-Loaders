@@ -4,7 +4,7 @@ import { Chart } from "chart.js";
 import { PlantDataModel } from '../data.model';
 import { displayDate } from '../date.model';
 import {INgxMyDpOptions, IMyDateModel} from 'ngx-mydatepicker'; 
-
+import { Router, ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-dashboard-graph',
   templateUrl: './dashboard-graph.component.html',
@@ -33,7 +33,7 @@ export class DashboardGraphComponent implements OnInit,OnChanges {
   thresholdValue:number;
   avergaeArray = [];
   averageValue:number;
-
+  selectedPlant : string;
   nextDayDate:String;
 
   iotAggUrl:string = "api/iottsaggregates/v3/aggregates/";
@@ -43,7 +43,10 @@ export class DashboardGraphComponent implements OnInit,OnChanges {
     dateFormat: 'dd/mm/yyyy',
   };
   
-  constructor(private httpClient : HttpClient) { }
+  constructor(private httpClient : HttpClient,private route: ActivatedRoute) { 
+
+    this.selectedPlant = route.snapshot.params['plantName'];
+  }
 
   ngOnInit() { 
     this.selectedGraphDate = this.currentDate.toDateString();
@@ -88,7 +91,7 @@ export class DashboardGraphComponent implements OnInit,OnChanges {
     // creating url for http get() call
   //  const requestUrl=this.baseUrl+this.iotAggUrl+this.aspectUrl+"?from="+fromDate
  //   +"&to="+toDate+this.timeInterval+"&select="+value;
- const requestUrl="http://ad001.siemens.net:8080/showTurbiditybyNameAndDate?name=delhi&date="+fromDate;
+ const requestUrl="http://ad001.siemens.net:8080/showTurbiditybyNameAndDate?name="+this.selectedPlant+"&date="+fromDate;
 
      console.log(requestUrl);
     //api call to get end time and average value
@@ -113,6 +116,21 @@ export class DashboardGraphComponent implements OnInit,OnChanges {
 
 
   }
+
+  else if(this.selectedValue.match("Water_PH"))
+{
+  tempData.avgValue = data[i]["ph"];
+  console.log("in for loop----in table in turbidity"+ tempData.avgValue);
+
+
+}
+else if(this.selectedValue.match("Water_TDS"))
+{
+  tempData.avgValue = data[i]["tds"];
+  console.log("in for loop----in table in turbidity"+ tempData.avgValue);
+
+
+}
 
 this.chartValues.push(tempData);  
 
@@ -150,8 +168,10 @@ this.chartValues.push(tempData);
 
     this.chartTimeArray = [];
     this.chartDate.forEach(element => {
+      let tempVarDate = new displayDate(); 
+      tempVarDate.timestamp = element.timestamp;
  //   this.chartTimeArray.push(element.splitTime);
-     this.chartTimeArray.push(element);
+     this.chartTimeArray.push(tempVarDate.timestamp );
     });
   }
 
