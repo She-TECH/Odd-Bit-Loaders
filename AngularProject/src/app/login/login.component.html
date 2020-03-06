@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+  <title>WQMS-Login</title>
+</head>
+<body>
+    <!-- ##### HEADER ##### -->
+    <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-4">
+                            <!-- <img class="float-left w-75" src="../../assets/images/rochemLogo.jpg" alt="Rochem India"> -->
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-5 col-sm-4">
+                            
+                        </div>
+                        <div class="col-md-2 col-sm-4">
+                            <img class="float-right w-75" src="../../assets/images/siemenslogo.jpg" alt="Siemens India">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- ##### end of header ###### -->
+
+    <div class="container-fluid p-0">
+        <img class="w-100" src="../../assets/images/water.jpg">
+        <div class="centered">
+            <div class="row p-5 bg-lightblack">
+                <div class="col-md-12 p-2">
+                    <div class="row">
+                        <div class="col-md-9 p-4 txt-col-white">
+                            <div class="row">
+                                <!-- <div class="col-md-12">
+                                    <h3>Rochem Separation Systems India <br> Pvt. Ltd.</h3>
+                                </div> -->
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-md-8">
+                                    <h1>Water Quality Monitoring</h1>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                <div class="col-md-12">
+                                    <h4>| Live Data to determine Water quality |</h4>
+                                </div>
+                            </div>
+                        </div>   
+                        
+                        <div class="col-md-3">
+                            <div class="row">
+                                <div class="col-md-12 text-center p-3 bg-white"> 
+                                    <img class="w-75" src="../../assets/images/siemenslogo.jpg" alt="Siemens">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 p-3 txt-col-black bg-aliceblue">
+                                   <div class="row">
+                                       <div class="col-md-12 text-center">
+                                            <p>User Login</p>
+                                       </div>
+                                   </div>
+                                    
+                                    <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="../../assets/images/if_user_male2_172626.png"></span>
+                                        </div>  
+                                       <input type="text" class="form-control" id="user" placeholder="Username" [(ngModel)]="username" required>
+								   </div>
+								   
+                                   <div class="form-group input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><img src="../../assets/images/if_Password_2_372911.png"></span>
+                                        </div> 
+                                        <input type="password" class="form-control" id="password" placeholder="Password" [(ngModel)]="password" required>
+									</div> 
+
+									<div *ngIf="badCredentials" class="form-group" style="text-align:center;">
+										<p class="txt-col-red">Bad Credentials!!</p>
+									</div>
+									
+                                    <div class="form-group" style="text-align:center;">
+                                        <button type="button" id="login" class="btn btn-primary" (click)="checkCredentials()">Log In</button>
+									</div>
+									
+									
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-1"></div>
+            </div>
+        </div>
+    </div>
+</body>

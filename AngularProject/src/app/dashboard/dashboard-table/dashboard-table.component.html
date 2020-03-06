@@ -1,0 +1,137 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="row p-20">
+            <div class="col-md-12 border-lg bg-white bx-shdw">
+                <div class="row bg-lg p-1">
+                    <div class="col-md-6 mt-1">
+                        <h6>{{processValuekey}}</h6>
+                    </div>
+            
+                    <div class="col-md-2"></div>
+                    
+                    <div class="col-md-4 custom-hover text-right">
+                        <div class="row">
+                            <div class="col-md-1"></div>
+                            <div class="col-md-8">
+                                <div class="input-group">
+                                    <input class="form-control" style="float:none" placeholder="--select date--" ngx-mydatepicker name="mydate"
+                                    [(ngModel)]="selectedTableDate" [options]="myDatePickerOptions" #dp="ngx-mydatepicker"/>
+                            
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-default" (click)="dp.toggleCalendar()">
+                                            <img class="w-100" src="../../../assets/images/if_calendar_1608599.png" alt="">
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-2 mt-1">
+                                <button type="button" class="btn btn-primary btn-sm" (click)="filterOnDateForTable()">OK</button>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="table-responsive table-scroll mt-4">
+                            <table class="table table-hover table-container table-bordered table-sm table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                   <!-- <th>Turbidity</th>-->
+                                    <th>{{processValuekey}}</th>
+                                    
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let rowData of tableData; let i = index">
+                                      <!--  <td>{{tableDate[i].splitDate}}</td>-->
+                                     <!-- <td>{{tableDate[i].splitTime}}</td>-->
+                                         <td>{{tableData[i].timeStamp}}</td>
+                                         <td>{{tableData[i].avgValue}}</td>
+                                     <!--   <td>{{rowData.avgValue}}</td>-->
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div *ngIf="showCalculatedValues; else elseBlock">
+                            <div class="row mt-4">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-6 border-lg bx-shdw">     
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <h5>{{dayMax}}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row bg-lg text-center p-1">
+                                        <div class="col-md-12">
+                                            <p class="mb-0">Day-Max</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col-md-2"></div>    
+                                <div class="col-md-6 border-lg bx-shdw">
+                                    
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <h5>{{dayMin}}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row bg-lg p-1 text-center">
+                                        <div class="col-md-12">
+                                            <p class="mb-0">Day-Min</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ng-template #elseBlock>
+                                <ng-container *ngIf="showTotal; else showingAverage">
+                                    <div class="row mt-5">
+                                        <div class="col-md-2"></div>
+                                        <div class="col-md-6 border-lg bx-shdw">     
+                                            <div class="row">
+                                                <div class="col-md-12 text-center">
+                                                    <h5>{{dayTotal}}</h5>
+                                                </div>
+                                            </div>
+                                            <div class="row bg-lg p-1 text-center">
+                                                <div class="col-md-12">
+                                                    <p class="mb-0">Day-Total</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                        </ng-template>
+                        <ng-template #showingAverage>
+                            <div class="row mt-5">
+                                <div class="col-md-2"></div>
+                                <div class="col-md-7 border-lg bx-shdw">     
+                                    <div class="row">
+                                        <div class="col-md-12 text-center">
+                                            <h5>{{dayAverage}}</h5>
+                                        </div>
+                                    </div>
+                                    <div class="row bg-lg p-1 text-center">
+                                        <div class="col-md-12">
+                                            <p class="mb-0">Day-Average</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                        
+                    </div>
+                
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div> 

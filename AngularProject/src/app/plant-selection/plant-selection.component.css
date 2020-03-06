@@ -1,0 +1,21 @@
+.body{
+    overflow-x: hidden;
+    overflow-y: hidden; 
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.border-lg{
+    border: 1px solid rgb(211, 211, 211);
+    border-radius: 10px;
+}
+.bg-lightblack{
+    background: rgba(46, 48, 48, 0.7);
+}
+
+.txt-col-white{
+    color: rgb(248, 245, 245);
+}

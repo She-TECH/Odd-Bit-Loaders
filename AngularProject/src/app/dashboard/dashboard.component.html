@@ -1,0 +1,255 @@
+<!Doctype HTML>
+<head>
+    <title>Water Quality Monitoring System</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+   
+</head>
+
+<body>
+    <!-- ##### HEADER ##### -->
+    <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-md-2 col-sm-4">
+                            <!-- <img class="float-left w-75" src="../../assets/images/rochemLogo.jpg" alt="Rochem India"> -->
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-5 col-sm-4">
+                            
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 bg-siemens">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <button type="button" class="btn btn-light btn-sm" (click)="goHomePage()">
+                                        <img class="btn-img" src="../../assets/images/home1.png"> Region Select
+                                    </button>
+                                    <button type="button" class="btn btn-primary btn-sm" (click)="open(content)" id="reportId">
+                                        <img class="btn-img" src="../../assets/images/report.png"> Report</button>
+                                </div>
+                                <div class="col-md-7 txt-col-white text-center">
+                                    <h3>{{selectedPlant}} - Water Quality Monitor</h3>
+                                </div>
+                                <div class="col-md-3 txt-col-white text-right">
+                                    Welcome, Admin!&nbsp;
+                                    <button type="button" class="btn btn-light btn-sm" (click)="doLogout()">
+                                        <img class="btn-img" src="../../assets/images/logout1.png"> Log-Out
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!-- ##### end of header ###### -->
+
+    <div class="container-fluid p-0">
+        <div class="row">
+            <!-- img src="../../assets/images/img_industry.jpg" alt="" style="width: 100%;"-->
+            <div class="col-md-12">
+                <div class="row">
+                    <!-- This column is for navigation between KPIs and Process values-->
+                    <div class="col-md-3 p-2 bg-nav txt-col-white">
+                        <!-- Nav tabs -->
+                        <div class="panel with-nav-tabs panel-primary"> 
+                            <div class="panel-heading">   
+                                <ul class="nav nav-tabs nav-justified">
+                                    <li class="nav-item">
+                                        <a class="nav-link active " id="processTab" (click)="addToProcessElement()" data-toggle="tab" ><b>Quality Measure</b></a>
+                                    </li>
+                                </ul>
+                            </div>   
+                            <!-- Tab panes -->
+                            <div class="panel-body">
+                                <div class="tab-content">
+                                    <div id="processValues" class="tab-pane container active ">
+                                        <ul class="list"> 
+                                            <li class=" active " id="Water_Temperature" (click)="selectProcessDataPoint('Water_Temperature')">
+                                                <div class="row p-1">
+                                                    <div class="col-md-7"><p><b>Water Temperature</b></p></div>
+                                                    <div class="col-md-5 text-right" [class.threshold-limit]="tLimit[0]"><p>{{navPaneValues[0]}} </p></div>
+                                                </div>
+                                            </li>
+                                            <li id="Water_Turbidity" (click)="selectProcessDataPoint('Water_Turbidity')">
+                                                <div class="row p-1">
+                                                    <div class="col-md-7"><p><b>Water Turbidity</b></p></div>
+                                                    <div class="col-md-5 text-right" [class.threshold-limit]="tLimit[1]"><p>{{navPaneValues[1]}}</p></div>
+                                                </div>
+                                            </li>
+                                            <li id="Water_PH" (click)="selectProcessDataPoint('Water_PH')">
+                                                <div class="row p-1">
+                                                    <div class="col-md-7"><b><p>Water PH</p></b></div>
+                                                    <div class="col-md-5 text-right" [class.threshold-limit]="tLimit[2]"><p>{{navPaneValues[2]}} </p></div>
+                                                </div>  
+                                            </li>
+                                            <li id="Water_TDS" (click)="selectProcessDataPoint('Water_TDS')">
+                                                <div class="row p-1">
+                                                    <div class="col-md-7"><b><p>Water TDS</p></b></div>
+                                                    <div class="col-md-5 text-right" [class.threshold-limit]="tLimit[2]"><p>{{navPaneValues[2]}}</p></div>
+                                                </div>  
+                                            </li>
+                                             <p></p>
+                                        </ul>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ##### Right side display page column ##### -->
+                    <div class="col-md-9 bg-vlg">
+     
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- Component for table display -->
+                                <app-dashboard-table [baseUrl]='baseUrl' [aspectUrl]='aspectUrl' [selectedValue]='lastSelectedValue' [processValuekey]='processValuekey' [showCalculatedValues]='showCalculatedValues' [showTotal]='showTotal' [currentFromDate]='currentFromDate' [currentToDate]='currentToDate'>
+                                </app-dashboard-table>
+                                <!-- Row for chart display -->  
+                                <app-dashboard-graph [baseUrl]='baseUrl' [aspectUrl]='aspectUrl' [selectedValue]='lastSelectedValue' [processValuekey]='processValuekey' [currentFromDate]='currentFromDate' [currentToDate]='currentToDate'></app-dashboard-graph>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+      </div>
+    </div>
+
+    <!-- #### Report geenration template ##### -->
+    <ng-template #content let-c="close" let-d="dismiss">
+        <div class="modal-header bg-lg">
+          <h5 class="modal-title">Report Generation</h5>
+          <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <form class="modal-content">
+                <div class="container p-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="fromDate"><b>From Date</b></label>
+                        </div>
+                        <div class="col md-1"><b>:</b></div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <input class="form-control" style="float:none;" placeholder="--select date--" ngx-mydatepicker name="mydate1"
+                                [(ngModel)]="reportFromDate" [options]="myDatePickerOptions" #dp1="ngx-mydatepicker"/>
+                        
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" (click)="dp1.toggleCalendar()">
+                                        <img class="w-100" src="../../assets/images/if_calendar_1608599.png" alt="">
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                  
+                  
+
+          
+                  <div class="row mt-2">
+                      <div class="col-md-4">
+                            <label for="toDate"><b>To Date</b></label>
+                      </div>
+                      <div class="col md-1"><b>:</b></div>
+                      <div class="col-md-6">
+                        <div class="input-group">
+                            <input class="form-control" style="float:none;" placeholder="--select date--" ngx-mydatepicker name="mydate2"
+                            [(ngModel)]="reportToDate" [options]="myDatePickerOptions" #dp2="ngx-mydatepicker"/>
+                    
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" (click)="dp2.toggleCalendar()">
+                                    <img class="w-100" src="../../assets/images/if_calendar_1608599.png" alt="">
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                  </div>
+            
+                  
+                  
+          
+                  <div class="row mt-2">
+                      <div class="col-md-4">
+                            <label for="category"><b>Category</b></label>
+                      </div>
+                      <div class="col md-1"><b>:</b></div>
+                      <div class="col-md-6">
+                            <select name="op-cat" style="width: 200px;">
+                                <option value="">--Select Category--</option>
+                                <option value="processValue" disabled>Quality Measure</option>
+                                <option value="kpi" disabled>KPI</option>
+                            </select>
+                      </div>
+                  </div>
+            
+                  
+                  
+          
+                  <div class="row mt-2">
+                        <div class="col-md-4">
+                            <label for="parameters"><b>Parameters</b></label>
+                        </div>
+                        <div class="col md-1"><b>:</b></div>
+                        <div class="col-md-6">
+                            <select name="op-param" style="width: 200px;">
+                                <option value="">--Select Parameters--</option>
+                                <option value="hPPumpOutletPressureTransmitter" disabled>Water Temperature</option>
+                                <option value="feedFlowTransmitter" disabled>Water Turbidity</option>
+                                <option value="finalPermeateFlow" disabled>Water PH</option>
+                                <option value="totalFeed" disabled>Water TDS</option>
+                            </select>
+                        </div>
+                    </div>
+          
+                  
+                 
+          
+                    <div class="row mt-2">
+                            <div class="col-md-4">
+                                <label for="format"><b>Report Format</b></label>
+                            </div>
+                            <div class="col md-1"><b>:</b></div>
+                            <div class="col-md-6">
+                                <select name="op-format" style="width: 200px;" >
+                                    <option value="selectFormat">-- Select Report Format --</option>  
+                                    <option value="excel">Excel</option>
+                                    <option value="pdf" disabled>PDF</option>
+                                </select>
+                            </div>
+                        </div>
+          
+                  
+                  
+          
+                  <div class="row mt-2">
+                        <div class="col-md-6 custom-hover text-right">
+                                <button type="submit" class="btn btn-primary mt-4" (click)="generateReport(reportFromDate, reportToDate);d('Cross click');">&nbsp;&nbsp;&nbsp;OK&nbsp;&nbsp;&nbsp;</button>&nbsp;&nbsp;&nbsp;
+                        </div>
+                        <div class="col-md-6 custom-hover text-left">
+                                <button type="button" class="btn btn-primary link mt-4" (click)="d('Cross click')">Cancel</button>
+                        </div>
+                    </div>
+            
+                  <div>
+                    
+                    
+                  </div>
+                </div>
+              </form>
+        </div>
+       
+      </ng-template>
+</body>
